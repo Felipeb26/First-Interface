@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,14 +18,21 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.springframework.context.annotation.Bean;
+
 import constroller.LoginController;
+import repository.UsuarioRepository;
+import repository.VerificaLogin;
 
 public class login extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JTextField inputNome;
 	private JPasswordField inputSenha;
 
+	UsuarioRepository userRepo;
 	LoginController controll = new LoginController(this);
 	
 	/**
@@ -103,7 +112,7 @@ public class login extends JFrame {
 		JButton btnEntrar = new JButton("ENTRAR");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loginControll(this);
+				controll.iMadeIt();
 			}
 		});
 		btnEntrar.setBackground(Color.BLACK);
@@ -129,34 +138,9 @@ public class login extends JFrame {
 		fundo.setBounds(-11, 0, 600, 590);
 		contentPane.add(fundo);
 	}
-	
-	protected void loginControll(ActionListener e) {
-		if(rootPaneCheckingEnabled == true) {
-			controll.iMadeIt();
-		}else {
-			System.out.println(e);
-		}
-		
-	}
 
 	public void showMessage(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);
-	}
-
-	public JTextField getInputNome() {
-		return inputNome;
-	}
-
-	public void setInputNome(JTextField inputNome) {
-		this.inputNome = inputNome;
-	}
-
-	public JPasswordField getInputSenha() {
-		return inputSenha;
-	}
-
-	public void setInputSenha(JPasswordField inputSenha) {
-		this.inputSenha = inputSenha;
 	}
 }
 

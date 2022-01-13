@@ -1,8 +1,22 @@
 package constroller;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import model.Pessoa;
+import repository.UsuarioRepository;
 import view.login;
 
+
+@Transactional
 public class LoginController {
+	
+	@Autowired
+	private UsuarioRepository userRepo;
+	
 	
 	private final login view;
 	
@@ -16,11 +30,8 @@ public class LoginController {
 		this.view.showMessage("eu fiz isso");
 	}
 	
-	
-	public void fazerLogin() {
-		
-		String nome = view.getInputNome().getText();
-		String senha = view.getInputSenha().getText();
+	public List<Pessoa> findAll(){
+		return userRepo.findAll();
 	}
-	
+
 }
