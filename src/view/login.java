@@ -1,21 +1,22 @@
 package view;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import constroller.LoginController;
 
 public class login extends JFrame {
 
@@ -23,6 +24,8 @@ public class login extends JFrame {
 	private JTextField inputNome;
 	private JPasswordField inputSenha;
 
+	LoginController controll = new LoginController(this);
+	
 	/**
 	 * Launch the application.
 	 */
@@ -100,12 +103,7 @@ public class login extends JFrame {
 		JButton btnEntrar = new JButton("ENTRAR");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(checkaLogin(inputNome.getText(), new String(inputSenha.getPassword()) )) {
-					JOptionPane.showMessageDialog(null, "entrei");
-				}else {
-					JOptionPane.showMessageDialog(null, "dados errados", "login invalido", JOptionPane.ERROR_MESSAGE);
-				}
+				loginControll(this);
 			}
 		});
 		btnEntrar.setBackground(Color.BLACK);
@@ -131,9 +129,34 @@ public class login extends JFrame {
 		fundo.setBounds(-11, 0, 600, 590);
 		contentPane.add(fundo);
 	}
-	public boolean checkaLogin(String login, String senha) {
+	
+	protected void loginControll(ActionListener e) {
+		if(rootPaneCheckingEnabled == true) {
+			controll.iMadeIt();
+		}else {
+			System.out.println(e);
+		}
 		
-		return login.equals("usuario") && senha.equals("123");
+	}
+
+	public void showMessage(String mensagem) {
+		JOptionPane.showMessageDialog(null, mensagem);
+	}
+
+	public JTextField getInputNome() {
+		return inputNome;
+	}
+
+	public void setInputNome(JTextField inputNome) {
+		this.inputNome = inputNome;
+	}
+
+	public JPasswordField getInputSenha() {
+		return inputSenha;
+	}
+
+	public void setInputSenha(JPasswordField inputSenha) {
+		this.inputSenha = inputSenha;
 	}
 }
 
